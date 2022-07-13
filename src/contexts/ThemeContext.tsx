@@ -4,13 +4,13 @@ import {
   useContext,
   useMemo,
   useState,
-} from "react";
-import { ThemeProvider } from "@mui/material";
-import { DarkTheme, LightTheme } from "../themes";
-import { Box } from "@mui/system";
+} from 'react';
+import { ThemeProvider } from '@mui/material';
+import { DarkTheme, LightTheme } from '../themes';
+import { Box } from '@mui/system';
 
 interface IThemeContextData {
-  themeName: "light" | "dark";
+  themeName: 'light' | 'dark';
   toggleTheme: () => void;
 }
 
@@ -27,16 +27,16 @@ export const useAppThemeContext = () => {
 export const AppThemeProvider: React.FC<IAppThemeProviderProps> = ({
   children,
 }) => {
-  const [themeName, setThemeName] = useState<"light" | "dark">("light");
+  const [themeName, setThemeName] = useState<'light' | 'dark'>('light');
 
   const toggleTheme = useCallback(() => {
     setThemeName((oldThemeName) =>
-      oldThemeName === "light" ? "dark" : "light"
+      oldThemeName === 'light' ? 'dark' : 'light'
     );
   }, []);
 
   const theme = useMemo(() => {
-    if (themeName === "light") return LightTheme;
+    if (themeName === 'light') return LightTheme;
 
     return DarkTheme;
   }, [themeName]);
