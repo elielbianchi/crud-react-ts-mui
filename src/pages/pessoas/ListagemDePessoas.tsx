@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { FerramentasDaListagem } from '../../components';
 import { LayoutBaseDePagina } from '../../layouts';
 
-export const ListagemDeCidades: React.FC = () => {
+export const ListagemDePessoas: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const busca = useMemo(() => {
@@ -13,7 +13,7 @@ export const ListagemDeCidades: React.FC = () => {
 
   return (
     <LayoutBaseDePagina
-      titulo="Listagem de cidades"
+      titulo="Listagem de pessoas"
       barraDeFerramentas={
         <FerramentasDaListagem
           mostrarInputBusca
