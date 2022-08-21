@@ -3,11 +3,13 @@ import { useSearchParams } from 'react-router-dom';
 import {
   Box,
   CircularProgress,
+  LinearProgress,
   Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
   TableHead,
   TableRow,
 } from '@mui/material';
@@ -65,42 +67,39 @@ export const ListagemDePessoas: React.FC = () => {
         />
       }
     >
-      {isLoading ? (
-        <Box
-          width="auto"
-          height="30vh"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <CircularProgress size={'10vh'} />
-        </Box>
-      ) : (
-        <TableContainer
-          component={Paper}
-          variant="outlined"
-          sx={{ m: 1, width: 'auto' }}
-        >
-          <Table>
-            <TableHead>
-              <TableRow>
+      <TableContainer
+        component={Paper}
+        variant="outlined"
+        sx={{ m: 1, width: 'auto' }}
+      >
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Ações</TableCell>
+              <TableCell>Nome completo</TableCell>
+              <TableCell>Email</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
                 <TableCell>Ações</TableCell>
-                <TableCell>Nome completo</TableCell>
-                <TableCell>Email</TableCell>
+                <TableCell>{row.nomeCompleto}</TableCell>
+                <TableCell>{row.email}</TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>Ações</TableCell>
-                  <TableCell>{row.nomeCompleto}</TableCell>
-                  <TableCell>{row.email}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+            ))}
+          </TableBody>
+          <TableFooter>
+            {isLoading && (
+              <TableRow>
+                <TableCell colSpan={3}>
+                  <LinearProgress variant="indeterminate" />
+                </TableCell>
+              </TableRow>
+            )}
+          </TableFooter>
+        </Table>
+      </TableContainer>
     </LayoutBaseDePagina>
   );
 };
