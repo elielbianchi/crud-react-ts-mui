@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
-  Box,
-  CircularProgress,
   LinearProgress,
   Paper,
   Table,
@@ -21,6 +19,7 @@ import {
 import { FerramentasDaListagem } from '../../components';
 import { LayoutBaseDePagina } from '../../layouts';
 import { useDebounce } from '../../hooks';
+import { Environment } from '../../environment';
 
 export const ListagemDePessoas: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -89,6 +88,11 @@ export const ListagemDePessoas: React.FC = () => {
               </TableRow>
             ))}
           </TableBody>
+
+          {totalCount === 0 && !isLoading && (
+            <caption>{Environment.LISTAGEM_VAZIA}</caption>
+          )}
+
           <TableFooter>
             {isLoading && (
               <TableRow>
