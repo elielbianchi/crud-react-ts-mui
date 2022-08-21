@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
+  Box,
+  CircularProgress,
   Paper,
   Table,
   TableBody,
@@ -63,30 +65,42 @@ export const ListagemDePessoas: React.FC = () => {
         />
       }
     >
-      <TableContainer
-        component={Paper}
-        variant="outlined"
-        sx={{ m: 1, width: 'auto' }}
-      >
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Ações</TableCell>
-              <TableCell>Nome completo</TableCell>
-              <TableCell>Email</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id}>
+      {isLoading ? (
+        <Box
+          width="auto"
+          height="30vh"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <CircularProgress size={'10vh'} />
+        </Box>
+      ) : (
+        <TableContainer
+          component={Paper}
+          variant="outlined"
+          sx={{ m: 1, width: 'auto' }}
+        >
+          <Table>
+            <TableHead>
+              <TableRow>
                 <TableCell>Ações</TableCell>
-                <TableCell>{row.nomeCompleto}</TableCell>
-                <TableCell>{row.email}</TableCell>
+                <TableCell>Nome completo</TableCell>
+                <TableCell>Email</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>Ações</TableCell>
+                  <TableCell>{row.nomeCompleto}</TableCell>
+                  <TableCell>{row.email}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
     </LayoutBaseDePagina>
   );
 };
